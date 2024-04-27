@@ -3,43 +3,66 @@ import Button from "./base/Button";
 import VolumeLevel from "./call/VolumeLevel";
 
 function TalkingAvatar({ imageUrl, intensity }) {
-  // Calculate the animation width based on the intensity
-  const animationWidth = intensity > 0 ? 5 + (intensity * 2) : 0;
+  const animationIntensity = {
+    boxShadow: `0 0 0 ${Math.max(0, intensity) * 2}px rgba(255, 165, 0, ${intensity / 10})`
+  };
 
-  // Inline styles for the avatar and the animated ring
   const styles = {
-    avatar: {
-      width: '150px',
-      height: '150px',
-      borderRadius: '50%',
-      background: `url(${imageUrl}) center center / cover no-repeat`,
+    container: {
       position: 'relative',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      boxShadow: '0 0 0 0 rgba(34, 193, 195, 0)',
-      transition: 'box-shadow 0.3s ease-in-out'
+      display: 'inline-block',
+      padding: '10px'
     },
-    ring: {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      width: `${150 + animationWidth * 2}px`,
-      height: `${150 + animationWidth * 2}px`,
-      transform: 'translate(-50%, -50%)',
+    image: {
+      width: '100px',
+      height: '100px',
       borderRadius: '50%',
-      boxShadow: `0 0 0 ${animationWidth}px rgba(34, 193, 195, 0.5)`,
-      transition: 'box-shadow 0.3s ease-in-out',
-      pointerEvents: 'none'  // Ensures the ring does not interfere with interactions
+      display: 'block',
+      transition: 'box-shadow 0.5s',
+      boxShadow: `0 0 20px ${intensity * 2}px rgba(255, 165, 0, 0.5)`
+    },
+    animation: {
+      position: 'absolute',
+      top: '-10px',
+      left: '-10px',
+      right: '-10px',
+      bottom: '-10px',
+      borderRadius: '50%',
+      boxShadow: intensity > 0 ? animationIntensity.boxShadow : 'none',
+      animation: intensity > 0 ? `pulse ${2 / Math.max(intensity, 1)}s infinite` : 'none'
+    },
+    '@keyframes pulse': {
+      '0%': {
+        boxShadow: `0 0 0 0 rgba(255, 165, 0, 0.7)`
+      },
+      '70%': {
+        boxShadow: `0 0 0 10px rgba(255, 165, 0, 0)`
+      },
+      '100%': {
+        boxShadow: `0 0 0 0 rgba(255, 165, 0, 0)`
+      }
     }
   };
 
   return (
-    <div style={{ position: 'relative' }}>
-      <div style={styles.avatar}>
-        {/* Empty container for layout alignment */}
-      </div>
-      <div style={styles.ring}></div>
+    <div style={styles.container}>
+      <img src={imageUrl} alt="Avatar" style={styles.image} />
+      <div style={styles.animation}></div>
+      <style>
+        {`
+          @keyframes pulse {
+            0% {
+              box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.7);
+            }
+            70% {
+              box-shadow: 0 0 0 10px rgba(255, 165, 0, 0);
+            }
+            100% {
+              box-shadow: 0 0 0 0 rgba(255, 165, 0, 0);
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }
