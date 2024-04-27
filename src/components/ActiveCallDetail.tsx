@@ -1,12 +1,10 @@
-import AssistantSpeechIndicator from "./call/AssistantSpeechIndicator";
 import Button from "./base/Button";
-import VolumeLevel from "./call/VolumeLevel";
 
-function TalkingAvatar({ imageUrl, intensity }) {
+function TalkingAvatar({ imageUrl, intensity }: { imageUrl: string, intensity: number }) {
   // green color
   const color = '0, 255, 0';
   // Build the RGBA color for boxShadow
-  const rgbaColor = (opacity) => `rgba(${color}, ${opacity})`;
+  const rgbaColor = (opacity: number) => `rgba(${color}, ${opacity})`;
 
   const animationIntensity = {
     boxShadow: `0 0 0 ${Math.max(0, intensity) * 2}px ${rgbaColor(intensity / 10)}`
@@ -70,9 +68,9 @@ function TalkingAvatar({ imageUrl, intensity }) {
       </style>
     </div>
   );
-        };
+};
 
-const ActiveCallDetail = ({ assistantIsSpeaking, volumeLevel, onEndCallClick }: { assistantIsSpeaking: boolean, volumeLevel: number, onEndCallClick: () => void }) => {
+const ActiveCallDetail = ({ volumeLevel, onEndCallClick }: {volumeLevel: number, onEndCallClick: () => void }) => {
   return (
     <div>
       <div
@@ -82,21 +80,20 @@ const ActiveCallDetail = ({ assistantIsSpeaking, volumeLevel, onEndCallClick }: 
           alignItems: "center",
           justifyContent: "center",
           padding: "15px",
-          // border: "1px solid #ddd",
           borderRadius: "8px",
           boxShadow: "0px 4px 8px rgba(0,0,0,0.8)",
-          // width: "400px",
-          width:"200px",
+          width: "200px",
           height: "200px",
         }}
       >
-        {/* <AssistantSpeechIndicator isSpeaking={assistantIsSpeaking} /> */}
-        {/* <VolumeLevel volume={volumeLevel} /> */}
         <TalkingAvatar imageUrl="https://pbs.twimg.com/media/FjU2lkcWYAgNG6d.jpg" intensity={volumeLevel} />
-        
+
       </div>
       <div style={{ marginTop: "40px", textAlign: "center" }}>
-        <Button label="End Call" onClick={onEndCallClick} />
+        <Button label="End Call" onClick={onEndCallClick}
+          color="white"
+          backgroundColor="#c0392b"
+        />
       </div>
     </div>
   );

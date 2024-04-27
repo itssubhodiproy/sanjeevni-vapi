@@ -1,18 +1,16 @@
 import ScaleLoader from "react-spinners/ScaleLoader";
 
-const Button = ({ label, onClick, isLoading, disabled }: { label: string, onClick: () => void, isLoading?: boolean, disabled?: boolean }) => {
+const Button = ({ label, onClick, isLoading, disabled, color, backgroundColor }: { label: string, onClick: () => void, isLoading?: boolean, disabled?: boolean, color?: string, backgroundColor?:string }) => {
   const opacity = disabled ? 0.75 : 1;
   const cursor = disabled ? "not-allowed" : "pointer";
 
   const Contents = isLoading ? (
     <ScaleLoader
-      color="#000"
-      // size={50}
+      color="#fff"
       height={10}
       width={2.5}
       margin={0.5}
       loading={true}
-      // css={{ display: "block", margin: "0 auto" }}
     />
   ) : (
     <p style={{ margin: 0, padding: 0 }}>{label}</p>
@@ -22,8 +20,8 @@ const Button = ({ label, onClick, isLoading, disabled }: { label: string, onClic
     <button
       onClick={onClick}
       style={{
-        backgroundColor: "white",
-        color: "black",
+        backgroundColor: backgroundColor,
+        color: color,
         border: "2px solid #ddd",
         borderRadius: "8px",
         padding: "8px 20px",

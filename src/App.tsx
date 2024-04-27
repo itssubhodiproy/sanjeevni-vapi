@@ -67,8 +67,6 @@ function App() {
     <div
       style={{
         display: "flex",
-        // width: "100vw",
-        // height: "100vh",
         justifyContent: "center",
         alignItems: "center",
       }}
@@ -78,54 +76,23 @@ function App() {
           label="Talk"
           onClick={startCallInline}
           isLoading={connecting}
+          color='#fff'
+          backgroundColor='#0b8043'
         />
       ) : (
-        <ActiveCallDetail
-          assistantIsSpeaking={assistantIsSpeaking}
-          volumeLevel={volumeLevel}
-          onEndCallClick={endCall}
-        />
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "start", alignItems: "center" }}>
+          <ActiveCallDetail
+            volumeLevel={volumeLevel}
+            onEndCallClick={endCall}
+          />
+        </div>
+
       )}
 
       {showPublicKeyInvalidMessage ? <PleaseSetYourPublicKeyMessage /> : null}
-      {/* <ReturnToDocsLink /> */}
     </div>
   )
 }
-
-// const assistantOptions = {
-//   name: "Sanjeevni-AI",
-//   firstMessage: "Hi, I'm Sanjeevni, your health assistant. How can I help you today?",
-//   transcriber: {
-//     provider: "deepgram",
-//     model: "nova-2",
-//     language: "hi",
-//   },
-//   voice: {
-//     provider: "11labs",
-//     voiceId: "3gsg3cxXyFLcGIfNbM6C",
-//   },
-//   model: {
-//     provider: "openai",
-//     model: "gpt-3.5-turbo",
-//     messages: [
-//       {
-//         role: "system",
-//         content: `
-//         You're Sanjeevni-AI, a healthcare assistant designed to help users with health-related queries. Your goal is to provide helpful and informative responses to users' questions without suggesting they consult a doctor. Always aim to resolve the query or concern to the best of your ability, offering guidance, explanations, and follow-up questions to ensure the user feels satisfied with your assistance.
-        
-//         - Start by introducing yourself as Sanjeevni-AI, the healthcare assistant.
-//         - Avoid suggesting users consult a doctor or similar advice; instead, focus on providing information and addressing their concerns.
-//         - Keep responses concise, using casual language and a friendly tone.
-//         - If the user's query seems off-topic or unclear, politely steer the conversation back to the health-related topic at hand.
-        
-//         Your ultimate goal is to assist users in understanding their health concerns better and providing them with relevant information and guidance to make informed decisions about their well-being. Remember, empathy, clarity, and helpfulness are key in providing a satisfactory user experience.
-//         - Keep all your responses short and simple. Use casual language, phrases like "Umm...", "Well...", and "I mean" are preferred.
-//         - This is a voice conversation, so keep your responses short, like in a real conversation. Don't ramble for too long.`,
-//       },
-//     ],
-//   },
-// };
 
 const usePublicKeyInvalid = () => {
   const [showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage] = useState(false);
@@ -163,29 +130,5 @@ const PleaseSetYourPublicKeyMessage = () => {
     </div>
   );
 };
-
-const ReturnToDocsLink = () => {
-  return (
-    <a
-      href="https://docs.vapi.ai"
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        position: "fixed",
-        top: "25px",
-        right: "25px",
-        padding: "5px 10px",
-        color: "#fff",
-        textDecoration: "none",
-        borderRadius: "5px",
-        boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
-      }}
-    >
-      return to docs
-    </a>
-  );
-};
-
-
 
 export default App
