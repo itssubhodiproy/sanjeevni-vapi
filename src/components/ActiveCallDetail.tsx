@@ -3,8 +3,13 @@ import Button from "./base/Button";
 import VolumeLevel from "./call/VolumeLevel";
 
 function TalkingAvatar({ imageUrl, intensity }) {
+  // green color
+  const color = '0, 255, 0';
+  // Build the RGBA color for boxShadow
+  const rgbaColor = (opacity) => `rgba(${color}, ${opacity})`;
+
   const animationIntensity = {
-    boxShadow: `0 0 0 ${Math.max(0, intensity) * 2}px rgba(255, 165, 0, ${intensity / 10})`
+    boxShadow: `0 0 0 ${Math.max(0, intensity) * 2}px ${rgbaColor(intensity / 10)}`
   };
 
   const styles = {
@@ -19,7 +24,7 @@ function TalkingAvatar({ imageUrl, intensity }) {
       borderRadius: '50%',
       display: 'block',
       transition: 'box-shadow 0.5s',
-      boxShadow: `0 0 20px ${intensity * 2}px rgba(255, 165, 0, 0.5)`
+      boxShadow: `0 0 20px ${intensity * 2}px ${rgbaColor(0.5)}`
     },
     animation: {
       position: 'absolute',
@@ -33,13 +38,13 @@ function TalkingAvatar({ imageUrl, intensity }) {
     },
     '@keyframes pulse': {
       '0%': {
-        boxShadow: `0 0 0 0 rgba(255, 165, 0, 0.7)`
+        boxShadow: `0 0 0 0 ${rgbaColor(0.7)}`
       },
       '70%': {
-        boxShadow: `0 0 0 10px rgba(255, 165, 0, 0)`
+        boxShadow: `0 0 0 10px ${rgbaColor(0)}`
       },
       '100%': {
-        boxShadow: `0 0 0 0 rgba(255, 165, 0, 0)`
+        boxShadow: `0 0 0 0 ${rgbaColor(0)}`
       }
     }
   };
@@ -52,20 +57,20 @@ function TalkingAvatar({ imageUrl, intensity }) {
         {`
           @keyframes pulse {
             0% {
-              box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.7);
+              box-shadow: 0 0 0 0 ${rgbaColor(0.7)};
             }
             70% {
-              box-shadow: 0 0 0 10px rgba(255, 165, 0, 0);
+              box-shadow: 0 0 0 10px ${rgbaColor(0)};
             }
             100% {
-              box-shadow: 0 0 0 0 rgba(255, 165, 0, 0);
+              box-shadow: 0 0 0 0 ${rgbaColor(0)};
             }
           }
         `}
       </style>
     </div>
   );
-}
+        };
 
 const ActiveCallDetail = ({ assistantIsSpeaking, volumeLevel, onEndCallClick }: { assistantIsSpeaking: boolean, volumeLevel: number, onEndCallClick: () => void }) => {
   return (
@@ -77,19 +82,20 @@ const ActiveCallDetail = ({ assistantIsSpeaking, volumeLevel, onEndCallClick }: 
           alignItems: "center",
           justifyContent: "center",
           padding: "15px",
-          border: "1px solid #ddd",
+          // border: "1px solid #ddd",
           borderRadius: "8px",
-          boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
-          width: "400px",
+          boxShadow: "0px 4px 8px rgba(0,0,0,0.8)",
+          // width: "400px",
+          width:"200px",
           height: "200px",
         }}
       >
-        <AssistantSpeechIndicator isSpeaking={assistantIsSpeaking} />
+        {/* <AssistantSpeechIndicator isSpeaking={assistantIsSpeaking} /> */}
         {/* <VolumeLevel volume={volumeLevel} /> */}
         <TalkingAvatar imageUrl="https://pbs.twimg.com/media/FjU2lkcWYAgNG6d.jpg" intensity={volumeLevel} />
         
       </div>
-      <div style={{ marginTop: "20px", textAlign: "center" }}>
+      <div style={{ marginTop: "40px", textAlign: "center" }}>
         <Button label="End Call" onClick={onEndCallClick} />
       </div>
     </div>

@@ -67,15 +67,15 @@ function App() {
     <div
       style={{
         display: "flex",
-        width: "100vw",
-        height: "100vh",
+        // width: "100vw",
+        // height: "100vh",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
       {!connected ? (
         <Button
-          label="Talk about your health concerns with Sanjeevni-AI"
+          label="Talk"
           onClick={startCallInline}
           isLoading={connecting}
         />
@@ -88,7 +88,7 @@ function App() {
       )}
 
       {showPublicKeyInvalidMessage ? <PleaseSetYourPublicKeyMessage /> : null}
-      <ReturnToDocsLink />
+      {/* <ReturnToDocsLink /> */}
     </div>
   )
 }
