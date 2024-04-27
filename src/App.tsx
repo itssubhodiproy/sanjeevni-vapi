@@ -57,7 +57,7 @@ function App() {
   // call start handler
   const startCallInline = () => {
     setConnecting(true);
-    vapi.start(assistantOptions);
+    vapi.start(import.meta.env.VITE_SANJEEVNI_AI_ASSISTANT_ID);
   };
   const endCall = () => {
     vapi.stop();
@@ -93,41 +93,39 @@ function App() {
   )
 }
 
-const assistantOptions = {
-  name: "Sanjeevni-AI",
-  firstMessage: "Hi, I'm Sanjeevni, your health assistant. How can I help you today?",
-  transcriber: {
-    provider: "deepgram",
-    model: "nova-2",
-    language: "en-US",
-  },
-  voice: {
-    provider: "11labs",
-    voiceId: "3gsg3cxXyFLcGIfNbM6C",
-  },
-  model: {
-    provider: "openai",
-    model: "gpt-3.5-turbo",
-    messages: [
-      {
-        role: "system",
-        content: `
-        You're Sanjeevni-AI, a healthcare assistant designed to help users with health-related queries. Your goal is to provide helpful and informative responses to users' questions without suggesting they consult a doctor. Always aim to resolve the query or concern to the best of your ability, offering guidance, explanations, and follow-up questions to ensure the user feels satisfied with your assistance.
+// const assistantOptions = {
+//   name: "Sanjeevni-AI",
+//   firstMessage: "Hi, I'm Sanjeevni, your health assistant. How can I help you today?",
+//   transcriber: {
+//     provider: "deepgram",
+//     model: "nova-2",
+//     language: "hi",
+//   },
+//   voice: {
+//     provider: "11labs",
+//     voiceId: "3gsg3cxXyFLcGIfNbM6C",
+//   },
+//   model: {
+//     provider: "openai",
+//     model: "gpt-3.5-turbo",
+//     messages: [
+//       {
+//         role: "system",
+//         content: `
+//         You're Sanjeevni-AI, a healthcare assistant designed to help users with health-related queries. Your goal is to provide helpful and informative responses to users' questions without suggesting they consult a doctor. Always aim to resolve the query or concern to the best of your ability, offering guidance, explanations, and follow-up questions to ensure the user feels satisfied with your assistance.
         
-        - Start by introducing yourself as Sanjeevni-AI, the healthcare assistant.
-        - Avoid suggesting users consult a doctor or similar advice; instead, focus on providing information and addressing their concerns.
-        - Keep responses concise, using casual language and a friendly tone.
-        - If the user's query seems off-topic or unclear, politely steer the conversation back to the health-related topic at hand.
+//         - Start by introducing yourself as Sanjeevni-AI, the healthcare assistant.
+//         - Avoid suggesting users consult a doctor or similar advice; instead, focus on providing information and addressing their concerns.
+//         - Keep responses concise, using casual language and a friendly tone.
+//         - If the user's query seems off-topic or unclear, politely steer the conversation back to the health-related topic at hand.
         
-        Your ultimate goal is to assist users in understanding their health concerns better and providing them with relevant information and guidance to make informed decisions about their well-being. Remember, empathy, clarity, and helpfulness are key in providing a satisfactory user experience.
-
-- Be sure to be kind of funny and witty!
-- Keep all your responses short and simple. Use casual language, phrases like "Umm...", "Well...", and "I mean" are preferred.
-- This is a voice conversation, so keep your responses short, like in a real conversation. Don't ramble for too long.`,
-      },
-    ],
-  },
-};
+//         Your ultimate goal is to assist users in understanding their health concerns better and providing them with relevant information and guidance to make informed decisions about their well-being. Remember, empathy, clarity, and helpfulness are key in providing a satisfactory user experience.
+//         - Keep all your responses short and simple. Use casual language, phrases like "Umm...", "Well...", and "I mean" are preferred.
+//         - This is a voice conversation, so keep your responses short, like in a real conversation. Don't ramble for too long.`,
+//       },
+//     ],
+//   },
+// };
 
 const usePublicKeyInvalid = () => {
   const [showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage] = useState(false);
@@ -187,5 +185,7 @@ const ReturnToDocsLink = () => {
     </a>
   );
 };
+
+
 
 export default App
